@@ -1,0 +1,59 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+# Load the dataset
+url = "https://www.kaggle.com/datasets/nelgiriyewithana/credit-card-fraud-detection-dataset-2023"
+# Load the dataset into a pandas dataframe (assuming it's a CSV file)
+df = pd.read_csv(url)
+
+# Data Preprocessing
+# (Handle missing values, outliers, and split into training and testing sets)
+
+# Feature Selection
+# (Choose relevant features for the classification task)
+
+# Normalization/Standardization
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Nearest Neighbor Baseline Model
+# k=1
+knn1 = KNeighborsClassifier(n_neighbors=1)
+knn1.fit(X_train_scaled, y_train)
+predictions_k1 = knn1.predict(X_test_scaled)
+
+# k=3
+knn3 = KNeighborsClassifier(n_neighbors=3)
+knn3.fit(X_train_scaled, y_train)
+predictions_k3 = knn3.predict(X_test_scaled)
+
+# Performance Evaluation
+# (Evaluate using accuracy, precision, recall, and F1-score)
+
+# Example Metrics
+accuracy_k1 = accuracy_score(y_test, predictions_k1)
+precision_k1 = precision_score(y_test, predictions_k1)
+recall_k1 = recall_score(y_test, predictions_k1)
+f1_k1 = f1_score(y_test, predictions_k1)
+
+accuracy_k3 = accuracy_score(y_test, predictions_k3)
+precision_k3 = precision_score(y_test, predictions_k3)
+recall_k3 = recall_score(y_test, predictions_k3)
+f1_k3 = f1_score(y_test, predictions_k3)
+
+# Print or log the results
+print("Performance Metrics for k=1:")
+print("Accuracy:", accuracy_k1)
+print("Precision:", precision_k1)
+print("Recall:", recall_k1)
+print("F1-Score:", f1_k1)
+
+print("\nPerformance Metrics for k=3:")
+print("Accuracy:", accuracy_k3)
+print("Precision:", precision_k3)
+print("Recall:", recall_k3)
+print("F1-Score:", f1_k3)
